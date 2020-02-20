@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-title>discover</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="9" offset-sm="3" text-center>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              {{ loadedplaces[0].title }}
+            </ion-card-title>
+            <ion-card-subtitle>
+              {{ loadedplaces[0].price | currency}}
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-img [src]="loadedplaces[0].imageUrl"></ion-img>
+          <ion-card-content>
+            {{ loadedplaces[0].description}}
+          </ion-card-content>
+          <div>
+            <ion-button 
+                        fill="clear" 
+                        color="primary"
+                        [routerLink]="['/', 'places', 'tabs', 'discover', 'loadedplaces[0].id']"
+                        >
+                      more
+                    </ion-button>
+                    <!-- routerDirection="forward" for the forward and backward  -->
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-sm="9" offset-sm="3" text-center>
+        <ion-list>
+          <ion-item *ngFor="let place of loadedplaces.slice(1)" [routerLink]="['/', 'places', 'tabs', 'discover', 'place.id']"
+          detail>
+            <ion-thumbnail slot="start">
+              <ion-img [src]="place.imageUrl"></ion-img>
+            </ion-thumbnail>  
+            <ion-label>
+              <h3>{{ place.title}}</h3>
+              <p>{{ place.description }}</p>
+              <p>{{ place.price }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
